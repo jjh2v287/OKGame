@@ -8,7 +8,15 @@ public class OKGame : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "Navmesh", "NavigationSystem" });
+		PublicDependencyModuleNames.AddRange(new string[]
+		{
+			"Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "AIModule", "Navmesh", "NavigationSystem"
+			
+			// Gameplay Abilities
+			,"GameplayAbilities"
+			,"GameplayTags"
+			,"GameplayTasks"
+		});
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
