@@ -20,6 +20,11 @@ public class OKGame : ModuleRules
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 
+		PrivateIncludePaths.AddRange(new string[]
+		{
+			"OKGame"
+		});
+
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
 		
