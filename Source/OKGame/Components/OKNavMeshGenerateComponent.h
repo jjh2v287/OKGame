@@ -22,7 +22,7 @@ public:
 	virtual void GetNavigationData(FNavigationRelevantData& Data) const override;
 
 	UPROPERTY(EditAnywhere, Category = "UK Navigation")
-	TSubclassOf<class UNavArea> AreaClass;
+	TSubclassOf<class UNavArea> NavAreaClass;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category= "UK Navigation")
 	TSubclassOf<class UNavArea> AreaClassToReplace;
@@ -35,7 +35,7 @@ protected:
 	FDelegateHandle OnNavAreaRegisteredDelegateHandle;
 	FDelegateHandle OnNavAreaUnregisteredDelegateHandle;
 
-	void OnNavAreaRegistered(const UWorld& World, const UClass* NavAreaClass);
-	void OnNavAreaUnregistered(const UWorld& World, const UClass* NavAreaClass);
+	void OnNavAreaRegistered(const UWorld& World, const UClass* InNavAreaClass);
+	void OnNavAreaUnregistered(const UWorld& World, const UClass* InNavAreaClass);
 #endif
 };

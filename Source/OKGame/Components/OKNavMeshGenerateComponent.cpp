@@ -10,7 +10,7 @@
 
 UOKNavMeshGenerateComponent::UOKNavMeshGenerateComponent(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-	, AreaClass(UNavArea_Default::StaticClass())
+	, NavAreaClass(UNavArea_Default::StaticClass())
 {
 	PrimaryComponentTick.bCanEverTick = false;
 	SetGenerateOverlapEvents(false);
@@ -30,12 +30,12 @@ bool UOKNavMeshGenerateComponent::IsNavigationRelevant() const
 
 void UOKNavMeshGenerateComponent::GetNavigationData(FNavigationRelevantData& Data) const
 {
-	if (AreaClass)
+	if (NavAreaClass)
 	{
 		// No need to create modifiers if the AreaClass we want to set is the default one unless we want to replace a NavArea to default.
-		if (AreaClass != FNavigationSystem::GetDefaultWalkableArea() || AreaClassToReplace)
+		if (NavAreaClass != FNavigationSystem::GetDefaultWalkableArea() || AreaClassToReplace)
 		{
-			Data.Modifiers.CreateAreaModifiers(this, AreaClass, AreaClassToReplace);
+			Data.Modifiers.CreateAreaModifiers(this, NavAreaClass, AreaClassToReplace);
 		}
 	}
 }
@@ -68,14 +68,18 @@ void UOKNavMeshGenerateComponent::BeginDestroy()
 
 #if WITH_EDITOR
 // This function is only called if GIsEditor == true
-void UOKNavMeshGenerateComponent::OnNavAreaRegistered(const UWorld& World, const UClass* NavAreaClass)
+void UOKNavMeshGenerateComponent::OnNavAreaRegistered(const UWorld& World, const UClass* InNavAreaClass)
 {
+	(void)World;
+	(void)InNavAreaClass;
 	FNavigationSystem::UpdateActorData(*this->GetOwner());
 }
 
 // This function is only called if GIsEditor == true
-void UOKNavMeshGenerateComponent::OnNavAreaUnregistered(const UWorld& World, const UClass* NavAreaClass)
+void UOKNavMeshGenerateComponent::OnNavAreaUnregistered(const UWorld& World, const UClass* InNavAreaClass)
 {
+	(void)World;
+	(void)InNavAreaClass;
 	FNavigationSystem::UpdateActorData(*this->GetOwner());
 }
 #endif // WITH_EDITOR
